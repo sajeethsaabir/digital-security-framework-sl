@@ -82,7 +82,7 @@ export default function LayoutShell({
               </button>
               <div className="flex items-center gap-2 min-w-0">
                 <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse shrink-0" />
-                <span className="text-[10px] sm:text-xs text-slate-500 font-mono truncate">Digital Security Toolkit v1.0</span>
+                <span className="text-[10px] sm:text-xs text-slate-500 font-mono truncate">Digital Security Framework v1.0</span>
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 shrink-0">
@@ -96,7 +96,7 @@ export default function LayoutShell({
         </main>
         <footer className="border-t border-slate-700/50 px-4 sm:px-6 py-3 sm:py-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 text-[10px] sm:text-xs text-slate-500">
-            <span>Digital Security Toolkit, Sri Lanka</span>
+            <span>Digital Security Framework, Sri Lanka</span>
             <span>Version 1.0 &middot; Last Updated: October 2025</span>
           </div>
         </footer>

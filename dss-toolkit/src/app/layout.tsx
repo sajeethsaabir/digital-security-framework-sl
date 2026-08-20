@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Digital Security Toolkit - Sri Lanka",
+  title: "Digital Security Framework - Sri Lanka",
   description: "A comprehensive guide to digital security, cyber threat response, and safe online practices for Sri Lankan internet users.",
 };
 

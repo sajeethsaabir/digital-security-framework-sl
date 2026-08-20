@@ -53,7 +53,7 @@ export default function Sidebar({
             </svg>
           </div>
           <div>
-            <div className="font-bold text-sm text-slate-100">Digital Security Toolkit</div>
+            <div className="font-bold text-sm text-slate-100">Digital Security Framework</div>
             <div className="text-[10px] text-slate-500 font-mono">v1.0 &middot; Sri Lanka</div>
           </div>
         </Link>

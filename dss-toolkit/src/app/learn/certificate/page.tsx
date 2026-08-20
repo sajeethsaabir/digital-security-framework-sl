@@ -91,7 +91,7 @@ export default function CertificatePage() {
 
             <div className="text-center mb-6">
               <p className="text-xs text-amber-400/60 font-mono uppercase tracking-widest mb-2">Certificate of Completion</p>
-              <h1 className="text-xl lg:text-2xl font-bold gradient-text-warm mb-2">Digital Security Toolkit</h1>
+              <h1 className="text-xl lg:text-2xl font-bold gradient-text-warm mb-2">Digital Security Framework</h1>
               <p className="text-sm text-slate-400">This certifies that</p>
               <p className="text-lg font-bold text-amber-300 my-2">{user?.name || 'Student'}</p>
               <p className="text-sm text-slate-400">
