@@ -1,0 +1,32 @@
+import { OnModuleDestroy } from '@nestjs/common';
+export declare class DbService implements OnModuleDestroy {
+    query(text: string, params?: any[]): Promise<import("pg").QueryResult<any>>;
+    onModuleDestroy(): Promise<void>;
+    getSections(): Promise<any[]>;
+    getSection(id: number): Promise<any>;
+    getSubsections(sectionId: number): Promise<any[]>;
+    getContentBlocks(sectionId: number, subsectionId?: number | null): Promise<any[]>;
+    getSubsection(id: number): Promise<any>;
+    getEmergencyContacts(): Promise<any[]>;
+    getGlossaryTerms(): Promise<any[]>;
+    getResources(): Promise<any[]>;
+    searchContent(searchTerm: string): Promise<any[]>;
+    getLearningPaths(): Promise<any[]>;
+    getLearningPath(pathId: number): Promise<any>;
+    getLearningSteps(pathId: number): Promise<any[]>;
+    getQuizQuestions(pathId: number): Promise<any[]>;
+    getUserProgress(userId: number, pathId: number): Promise<any>;
+    upsertUserProgress(userId: number, pathId: number, stepsCompleted: number[], completed?: boolean): Promise<any>;
+    submitQuizResult(userId: number, pathId: number, score: number, total: number, passed: boolean): Promise<void>;
+    getAllUserProgress(userId: number): Promise<any[]>;
+    createCertificate(userId: number): Promise<any>;
+    getCertificate(userId: number): Promise<any>;
+    getAllCertificates(userId: number): Promise<any[]>;
+    findUserByEmail(email: string): Promise<any>;
+    createUser(email: string, name: string, passwordHash: string): Promise<any>;
+    createSession(userId: number, token: string, expiresAt: Date): Promise<void>;
+    getUserFromToken(token: string | undefined | null): Promise<any>;
+    deleteSession(token: string): Promise<void>;
+    upsertChecklistProgress(userId: number, contentBlockId: number, checked: boolean): Promise<void>;
+    getChecklistProgress(userId: number): Promise<any[]>;
+}
