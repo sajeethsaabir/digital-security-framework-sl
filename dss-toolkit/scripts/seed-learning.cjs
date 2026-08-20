@@ -170,7 +170,7 @@ async function seedLearning() {
       const qq = path.questions[qi];
       await q(
         'INSERT INTO quiz_questions (path_id, question, options, correct_index, explanation, sort_order) VALUES ($1,$2,$3,$4,$5,$6)',
-        [pathId, qq.q, qq.opts, qq.correct, qq.exp, qi]
+        [pathId, qq.q, JSON.stringify(qq.opts), qq.correct, qq.exp, qi]
       );
     }
   }

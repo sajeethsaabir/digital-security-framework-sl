@@ -153,7 +153,7 @@ export class DbService implements OnModuleDestroy {
              completed_at = CASE WHEN $4 THEN NOW() ELSE completed_at END
          WHERE user_id = $1 AND path_id = $2
          RETURNING *`,
-        [userId, pathId, stepsCompleted, completed ?? existing.completed]
+        [userId, pathId, JSON.stringify(stepsCompleted), completed ?? existing.completed]
       );
       return result.rows[0];
     }
@@ -161,7 +161,7 @@ export class DbService implements OnModuleDestroy {
       `INSERT INTO user_learning_progress (user_id, path_id, steps_completed, completed)
        VALUES ($1, $2, $3, $4)
        RETURNING *`,
-      [userId, pathId, stepsCompleted, completed ?? false]
+      [userId, pathId, JSON.stringify(stepsCompleted), completed ?? false]
     );
     return result.rows[0];
   }

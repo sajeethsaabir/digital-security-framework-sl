@@ -69,7 +69,7 @@ export default async function Home() {
               </span>
             </div>
             <h1 className="text-3xl lg:text-4xl font-bold mb-2">
-              <span className="gradient-text">Security Toolkit</span>
+              <span className="gradient-text">Digital Security Toolkit</span>
             </h1>
             <p className="text-sm lg:text-base text-slate-400 leading-relaxed max-w-2xl">
               Your comprehensive guide to staying safe online. Learn to protect your data,
