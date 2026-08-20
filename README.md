@@ -1,4 +1,4 @@
-# Digital Security Toolkit — Sri Lanka
+# Digital Security Framework — Sri Lanka
 
 A web application that turns the *Digital Security Toolkit v1.0* (Sri Lanka) into an
 interactive digital safety guide. It helps everyday internet users in Sri Lanka respond
