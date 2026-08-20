@@ -3,7 +3,8 @@
 import { useState, useCallback } from 'react';
 import { useAuth } from './AuthProvider';
 
-const P = '/images/illustrations';
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const P = `${BASE_PATH}/images/illustrations`;
 const contentImages: Record<string, string> = {
   'hacked': `${P}/hacker.jpg`,
   'hacker': `${P}/hacker.jpg`,

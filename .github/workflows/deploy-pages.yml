@@ -1,0 +1,84 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: dss-toolkit/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: dss-toolkit
+        run: npm ci
+
+      - name: Install PostgreSQL
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql
+
+      - name: Start dedicated Postgres instance (socket /tmp/opencode:5433, user zuko)
+        run: |
+          PGBIN=$(ls -d /usr/lib/postgresql/*/bin | head -1)
+          mkdir -p /tmp/opencode
+          "$PGBIN/initdb" -D /tmp/opencode/pgdata -U zuko --auth=trust -E UTF8
+          "$PGBIN/pg_ctl" -D /tmp/opencode/pgdata -l /tmp/opencode/pg.log \
+            -o "-p 5433 -k /tmp/opencode" start
+          "$PGBIN/createdb" -h /tmp/opencode -p 5433 -U zuko dss_toolkit
+
+      - name: Create schema
+        run: |
+          PGBIN=$(ls -d /usr/lib/postgresql/*/bin | head -1)
+          "$PGBIN/psql" -h /tmp/opencode -p 5433 -U zuko -d dss_toolkit \
+            -f dss-toolkit/scripts/schema.sql
+
+      - name: Seed content database
+        working-directory: dss-toolkit
+        run: node scripts/seed.cjs ../dss-toolkit-v1.0.md
+
+      - name: Seed learning paths
+        working-directory: dss-toolkit
+        run: node scripts/seed-learning.cjs
+
+      - name: Build static export
+        working-directory: dss-toolkit
+        run: npm run build:static
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dss-toolkit/out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

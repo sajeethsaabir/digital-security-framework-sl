@@ -1,6 +1,11 @@
 import { notFound } from 'next/navigation';
-import { getSection, getSubsections, getContentBlocks } from '@/lib/db';
+import { getSection, getSubsections, getContentBlocks, getSections } from '@/lib/db';
 import SectionPage from '@/components/SectionPage';
+
+export async function generateStaticParams() {
+  const sections = await getSections();
+  return sections.map((s: any) => ({ id: String(s.id) }));
+}
 
 export default async function Page({
   params,

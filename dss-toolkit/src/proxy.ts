@@ -14,6 +14,11 @@ const CSP_DIRECTIVES = [
 ].join('; ');
 
 export function proxy(request: NextRequest) {
+  // Static export runs without a server, so no proxy is applied.
+  if (process.env.STATIC_EXPORT === 'true') {
+    return NextResponse.next();
+  }
+
   const response = NextResponse.next();
   const pathname = request.nextUrl.pathname;
 

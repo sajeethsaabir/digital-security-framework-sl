@@ -8,6 +8,7 @@
     "dev:all": "concurrently -n frontend,backend -c cyan,magenta \"next dev\" \"npm run dev --prefix ../backend\"",
     "build": "next build",
     "build:all": "npm run build --prefix ../backend && next build",
+    "build:static": "STATIC_EXPORT=true NEXT_PUBLIC_BASE_PATH=/digital-security-framework-sl next build",
     "start": "next start",
     "lint": "eslint"
   },
